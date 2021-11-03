@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace ORMDatabaseModule
 {
+    public interface ITable
+    {
+
+    }
 
     public class DatabaseContext : DbContext
     {
@@ -25,13 +29,13 @@ namespace ORMDatabaseModule
     }
 
     [Index(nameof(Name), IsUnique = true)]
-    public class Album
+    public class Album: ITable
     {
         public int AlbumId { get; set; }
         public string Name { get; set; }
         public string DateCreation { get; set; }
     }
-    public class MetaData
+    public class MetaData : ITable
     {
         public int MetadataId { get; set; }
         public string Manufacturer { get; set; }
@@ -43,7 +47,7 @@ namespace ORMDatabaseModule
         public int Flash { get; set; }
         public string DateCreation { get; set; }
     }
-    public class Photo
+    public class Photo : ITable
     {
         public int PhotoId { get; set; }
         public string Path { get; set; }
@@ -51,7 +55,7 @@ namespace ORMDatabaseModule
         public MetaData MetaData { get; set; }
         public int MetaDataId { get; set; }
     }
-    public class AlbumContext
+    public class AlbumContext : ITable
     {
         public int AlbumContextId { get; set; }
         public Album Album { get; set; }
