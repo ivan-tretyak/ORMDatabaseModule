@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ORMDatabaseModule
 {
@@ -44,7 +40,7 @@ namespace ORMDatabaseModule
         public string Manufacturer { get; set; }
         public string Model { get; set; }
         public int Orientation { get; set; }
-        public int FocusLength { get; set; }
+        public float FocusLength { get; set; }
         public float Longitude { get; set; }
         public float Latitude { get; set; }
         public int Flash { get; set; }
