@@ -73,18 +73,18 @@ namespace ORMDatabaseModule.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AlbumContexts", x => x.AlbumContextId);
-                    table.ForeignKey(
-                        name: "FK_AlbumContexts_Albums_AlbumId",
-                        column: x => x.AlbumId,
-                        principalTable: "Albums",
-                        principalColumn: "AlbumId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AlbumContexts_Photos_PhotoId",
-                        column: x => x.PhotoId,
-                        principalTable: "Photos",
-                        principalColumn: "PhotoId",
-                        onDelete: ReferentialAction.Cascade);
+                    //table.ForeignKey(
+                    //    name: "FK_AlbumContexts_Albums_AlbumId",
+                    //    column: x => x.AlbumId,
+                    //    principalTable: "Albums",
+                    //    principalColumn: "AlbumId",
+                    //    onDelete: ReferentialAction.Cascade);
+                    //table.ForeignKey(
+                    //    name: "FK_AlbumContexts_Photos_PhotoId",
+                    //    column: x => x.PhotoId,
+                    //    principalTable: "Photos",
+                    //    principalColumn: "PhotoId",
+                    //    onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
