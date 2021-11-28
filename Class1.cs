@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 
+
+
 namespace ORMDatabaseModule
 {
     public interface ITable
@@ -9,7 +11,7 @@ namespace ORMDatabaseModule
     }
 
     public class DatabaseContext : DbContext
-    {
+    { 
         public DbSet<Album> Albums { get; set; }
         public DbSet<MetaData> MetaDatas { get; set; }
         public DbSet<Photo> Photos { get; set; }
@@ -22,6 +24,7 @@ namespace ORMDatabaseModule
             string v = $"{path}{System.IO.Path.DirectorySeparatorChar}photos.db";
             DbPath = v;
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         => options.UseSqlite($"Data Source={DbPath}");
 
