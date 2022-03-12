@@ -15,6 +15,7 @@
 //51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using System;
 
 
@@ -35,8 +36,23 @@ namespace ORMDatabaseModule
         public string DbPath { get; private set; }
         public DatabaseContext()
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
+            RegistryKey currentUser = Registry.CurrentUser;
+            RegistryKey registry = currentUser.OpenSubKey("appPhotoOrginizer");
+            string pathToSearch = registry.GetValue("FolderSync").ToString();
+
+            if (pathToSearch is null)
+            {
+                var folder = Environment.SpecialFolder.LocalApplicationData;
+                pathToSearch = Environment.GetFolderPath(folder);
+            }
+
+           
+            string v = $"{pathToSearch}{System.IO.Path.DirectorySeparatorChar}photos.db";
+            DbPath = v;
+        }
+
+        public DatabaseContext(string path)
+        {
             string v = $"{path}{System.IO.Path.DirectorySeparatorChar}photos.db";
             DbPath = v;
         }
