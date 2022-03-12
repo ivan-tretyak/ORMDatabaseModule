@@ -38,12 +38,17 @@ namespace ORMDatabaseModule
         {
             RegistryKey currentUser = Registry.CurrentUser;
             RegistryKey registry = currentUser.OpenSubKey("appPhotoOrginizer");
-            string pathToSearch = registry.GetValue("FolderSync").ToString();
+            var pathToSearchKey = registry.GetValue("FolderSync");
 
-            if (pathToSearch is null)
+            string pathToSearch;
+            if (pathToSearchKey is null)
             {
                 var folder = Environment.SpecialFolder.LocalApplicationData;
                 pathToSearch = Environment.GetFolderPath(folder);
+            }
+            else
+            {
+                pathToSearch = pathToSearchKey.ToString();
             }
 
            
