@@ -28,11 +28,13 @@ namespace ORMDatabaseModule
     }
 
     public class DatabaseContext : DbContext
-    { 
+    {
         public DbSet<Album> Albums { get; set; }
         public DbSet<MetaData> MetaDatas { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<AlbumContext> AlbumContexts { get; set; }
+        public DbSet<KeyWords> KeyWords { get; set; }
+        public DbSet<KeyWordsList> keyWordsLists {get; set;}
         public string DbPath { get; private set; }
         public DatabaseContext()
         {
@@ -101,5 +103,20 @@ namespace ORMDatabaseModule
         public int AlbumId { get; set; }
         public Photo Photo { get; set; }
         public int PhotoId { get; set; }
+    }
+
+    public class KeyWords : ITable
+    {
+        public int KeyWordsId { get; set; }
+        public string KeyWord { get; set; }
+    }
+
+    public class KeyWordsList : ITable
+    { 
+        public int KeyWordsListId { get; set; }
+        public Photo Photo { get; set; }
+        public int PhotoId { get; set; }
+        public KeyWords KeyWords { get; set; }
+        public int KeyWordsId { get; set; }
     }
 }

@@ -56,6 +56,41 @@ namespace ORMDatabaseModule.Migrations
                     b.ToTable("AlbumContexts");
                 });
 
+            modelBuilder.Entity("ORMDatabaseModule.KeyWords", b =>
+                {
+                    b.Property<int>("KeyWordsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("KeyWord")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("KeyWordsId");
+
+                    b.ToTable("KeyWords");
+                });
+
+            modelBuilder.Entity("ORMDatabaseModule.KeyWordsList", b =>
+                {
+                    b.Property<int>("KeyWordsListId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("KeyWordsId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PhotoId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("KeyWordsListId");
+
+                    b.HasIndex("KeyWordsId");
+
+                    b.HasIndex("PhotoId");
+
+                    b.ToTable("keyWordsLists");
+                });
+
             modelBuilder.Entity("ORMDatabaseModule.MetaData", b =>
                 {
                     b.Property<int>("MetadataId")
@@ -128,6 +163,25 @@ namespace ORMDatabaseModule.Migrations
                         .IsRequired();
 
                     b.Navigation("Album");
+
+                    b.Navigation("Photo");
+                });
+
+            modelBuilder.Entity("ORMDatabaseModule.KeyWordsList", b =>
+                {
+                    b.HasOne("ORMDatabaseModule.KeyWords", "KeyWords")
+                        .WithMany()
+                        .HasForeignKey("KeyWordsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ORMDatabaseModule.Photo", "Photo")
+                        .WithMany()
+                        .HasForeignKey("PhotoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("KeyWords");
 
                     b.Navigation("Photo");
                 });
